@@ -1,19 +1,32 @@
-let listaDeNome = [];
+let listaDeNomes = [];
 
 function adicionarAmigo(){
-    idCampo = "amigo"
+    const idCampo = "amigo";
     nomeDoAmigo = document.getElementById(idCampo).value.trim();
     
-    if (nomeDoAmigo == "" || nomeDoAmigo == null) {
-        alert ("Por favor, insira um nome.")
+    if (nomeDoAmigo == "") {
+        alert("Por favor, insira um nome.");
     }else {
-        listaDeNome.push(nomeDoAmigo);
+        listaDeNomes.push(nomeDoAmigo);
+
+        atualizarListaHTML();
     }
-    limparCampoPorId(idCampo);
     
-    console.log(listaDeNome);   
+    limparCampoPorId(idCampo);
 }
 
 function limparCampoPorId(id) {
     document.getElementById(id).value = "";
+}
+
+function atualizarListaHTML(){
+    let listaHTML = document.getElementById("listaAmigos");
+
+    listaHTML.innerHTML = "";
+
+    for (let nome of listaDeNomes) {
+        let li = document.createElement("li"); 
+        li.textContent = nome;                
+        listaHTML.appendChild(li);
+    } 
 }
